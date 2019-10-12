@@ -1,0 +1,25 @@
+{
+  "name": "dusg",
+  "version": "0.0.1",
+  "description": "Digital Uncomplicated Site Generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luketeaford/dusg.git"
+  },
+  "keywords": [
+    "dusg",
+    "static",
+    "site",
+    "generator"
+  ],
+  "author": "Luke Teaford",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/luketeaford/dusg/issues"
+  },
+  "homepage": "https://github.com/luketeaford/dusg#readme"
+}
