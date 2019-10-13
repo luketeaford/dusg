@@ -1,5 +1,6 @@
 const fs = require('fs').promises
 
-module.exports = () => {
-  fs.writeFile('./index.txt', 'Hello, world!\n')
+module.exports = async (aFilepath) => {
+  const data = await fs.readFile(aFilepath, { encoding: 'utf8' })
+  return fs.writeFile('./index.txt', data)
 }
