@@ -1,14 +1,13 @@
 const fs = require('fs').promises
 const parse = require('./lib/parse')
 
-const index = async function (aFilePath) {
+const compose = (f, g) => x => f(g(x))
+
+const index = async function (aFilePath, aDestDir, aTemplateFn) {
   const data = await fs.readFile(aFilePath)
-  const template = (html, metadata) => `
-<!doctype html>
-<title>${metadata.title}</title>
-${html}`.trim()
-  const { html, metadata } = parse(data.toString())
-  return fs.writeFile('./index.html', template(html, metadata))
+  const template = compose(aTemplateFn, parse)
+  await fs.mkdir(`${aDestDir}`)
+  return fs.writeFile(`${aDestDir}/example.html`, template(data))
 }
 
 module.exports = index
