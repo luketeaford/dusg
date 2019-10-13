@@ -11,7 +11,8 @@ test('The index function creates an html file with the contents from the source 
 <title>Page Title</title>
 <h1>Headline</h1>
 <p>Hello, world!</p>
-`
+
+<p>Last edited: October 13, 2019</p>`
       t.equal(data.toString(), expected)
       await fs.unlink('./index.html')
       t.end()

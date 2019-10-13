@@ -6,7 +6,8 @@ module.exports = async (aFilepath) => {
   const template = (html, metadata) => `
 <!doctype html>
 <title>${metadata.title}</title>
-${html}`
+${html}
+<p>Last edited: ${metadata.date}</p>`
   const { html, metadata } = parse(data.toString())
   return fs.writeFile('./index.html', template(html, metadata))
 }
