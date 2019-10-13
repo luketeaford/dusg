@@ -1,7 +1,7 @@
 {
   "name": "dusg",
   "version": "0.0.1",
-  "description": "Digital Uncomplicated Site Generator",
+  "description": "Decoupled Universal Site Generator",
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf coverage",
