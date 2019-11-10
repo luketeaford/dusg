@@ -38,7 +38,7 @@ test('The index function creates an html file in the chosen directory with the c
     .then(async data => {
       const expected = '<title>Page Title</title>'
       t.equal(data.toString(), expected)
-      await fs.unlink('./test-public/example.html')
+      fs.unlink('./test-public/example.html')
       await fs.rmdir('./test-public')
       t.end()
     })
