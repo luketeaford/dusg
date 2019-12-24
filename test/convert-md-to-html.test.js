@@ -1,11 +1,11 @@
 const test = require('tape')
-const index = require('../index')
+const convertMdToHtml = require('../lib/convert-md-to-html')
 const fs = require('fs').promises
 
 const mockTemplateFn = pageData => `<title>${pageData.metadata.title}</title>`
 
-test('The index function creates an html file from the source file.', async t => {
-  await index('./test/data/example.md', '.', x => x)
+test('The convert md to html function creates an html file from the source file.', async t => {
+  await convertMdToHtml('./test/data/example.md', '.', x => x)
     .catch(err => t.end(err))
 
   fs.readFile('./example.html')
@@ -17,8 +17,8 @@ test('The index function creates an html file from the source file.', async t =>
     .catch(err => t.end(err))
 })
 
-test('The index function uses the template function the user supplies to create an html file from the source file parsed as Markdown and YAML.', async t => {
-  await index('./test/data/example.md', '.', mockTemplateFn)
+test('The convert md to html function uses the template function the user supplies to create an html file from the source file parsed as Markdown and YAML.', async t => {
+  await convertMdToHtml('./test/data/example.md', '.', mockTemplateFn)
     .catch(err => t.end(err))
 
   fs.readFile('./example.html')
@@ -30,8 +30,8 @@ test('The index function uses the template function the user supplies to create 
     .catch(err => t.end(err))
 })
 
-test('The index function creates an html file in the chosen directory with the contents from the source file.', async t => {
-  await index('./test/data/example.md', './test-public', mockTemplateFn)
+test('The convert md to html function creates an html file in the chosen directory with the contents from the source file.', async t => {
+  await convertMdToHtml('./test/data/example.md', './test-public', mockTemplateFn)
     .catch(err => t.end(err))
 
   fs.readFile('./test-public/example.html')
