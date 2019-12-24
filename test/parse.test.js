@@ -1,6 +1,8 @@
 const test = require('tape')
 const parse = require('../lib/parse')
 
+// Note: These tests can be deleted once the public API is completed.
+
 test('The parse function takes a string containing YAML and Markdown and returns an object with an html key containing the parsed Markdown.', t => {
   const mockData = `
 ---

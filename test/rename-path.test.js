@@ -1,6 +1,8 @@
 const test = require('tape')
 const renamePath = require('../lib/rename-path')
 
+// Note: These tests can be deleted once the public API is completed.
+
 test('The renamePath function changes the extension from md to html.', t => {
   t.equal(renamePath('./a/b/c/foo.md', { useCleanUrls: false }), './a/b/c/foo.html')
   t.end()
