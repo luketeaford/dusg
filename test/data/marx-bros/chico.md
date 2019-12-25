@@ -1,5 +1,0 @@
----
-title: Chico
----
-
-# Chico Marx

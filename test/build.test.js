@@ -2,20 +2,16 @@ const test = require('tape')
 const build = require('../lib/build')
 const fs = require('fs').promises
 
-const mockTemplateFn = pageData => `<title>${pageData.metadata.title}</title>`
-
-test('The build function creates an html file from each markdown file in a directory.', async t => {
-  await build('./test/data/marx-bros', './test-marx', mockTemplateFn)
+test('The build function', async t => {
+  await build('./test/data')
     .catch(err => t.end(err))
 
-  fs.readFile('./test-marx/harpo.html')
+  fs.readFile('./test-output/very/very/very/deep/nesting/stinks.txt')
     .then(async data => {
-      const expected = '<title>Harpo</title>'
-      t.equal(data.toString(), expected)
-      fs.unlink('./test-marx/chico.html')
-      fs.unlink('./test-marx/groucho.html')
-      fs.unlink('./test-marx/harpo.html')
-      await fs.rmdir('./test-marx')
+      t.equal(data.toString().trim(), 'Something fishy', 'copies files a little.')
+      fs.unlink('./test-output/very/very/very/deep/nesting/stinks.txt')
+      await fs.rmdir('./test-output', { recursive: true })
+        .catch(err => t.end(err))
       t.end()
     })
     .catch(err => t.end(err))

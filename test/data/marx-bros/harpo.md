@@ -1,5 +1,0 @@
----
-title: Harpo
----
-
-# Harpo Marx

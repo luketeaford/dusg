@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf coverage",
     "lint": "standard --fix",
-    "test": "NODE_ENV=test nyc tape **/*.test.js"
+    "test": "NODE_ENV=test nyc tape test/*.test.js"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,0 @@
----
-title: Groucho
----
-
-# Groucho Marx
