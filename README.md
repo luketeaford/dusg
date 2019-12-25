@@ -1,2 +1,2 @@
 # dusg
-Digital Uncomplicated Site Generator
+Digital Universal Site Generator
