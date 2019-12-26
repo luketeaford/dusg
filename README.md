@@ -2,7 +2,6 @@
 Digital Universal Site Generator
 
 ## TODO
-- [ ] Support a settings object
 - [ ] Support clean URLs
 - [ ] Pass files around so nav can be built
 - [ ] Test what happens if one of the source files is an image

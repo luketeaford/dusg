@@ -3,7 +3,12 @@ const build = require('../lib/build')
 const fs = require('fs').promises
 
 test('The build function', async t => {
-  await build('./test/data', './test-output')
+  const testSettings = {
+    src: './test/data',
+    dest: './test-output'
+  }
+
+  await build(testSettings)
     .catch(err => t.end(err))
 
   fs.readFile('./test-output/very/very/very/deep/nesting/stinks.html')
