@@ -28,7 +28,7 @@ test('The build function', async t => {
 
   fs.readFile('./test-output/whatever.htm')
     .then(async data => {
-      t.pass('allows the extension to be configured.')
+      t.pass('allows the extensions of the files to be configured.')
       fs.unlink('./test-output/whatever.htm')
       await fs.rmdir('./test-output', { recursive: true })
         .catch(err => t.end(err))
