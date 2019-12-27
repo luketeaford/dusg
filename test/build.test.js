@@ -9,11 +9,11 @@ test('The build function', async t => {
   })
     .catch(err => t.end(err))
 
-  fs.readFile('./test-output/very/very/very/deep/nesting/stinks.html')
+  fs.readFile('./test-output/very/very/very/deep/nesting/stinks/index.html')
     .then(async data => {
       t.ok(data, 'moves files in the source directory to a parallel structure in the dest directory.')
       t.pass('changes the extensions of the files in the dest directory to ".html" if an extension is not provided.')
-      fs.unlink('./test-output/very/very/very/deep/nesting/stinks.html')
+      fs.unlink('./test-output/very/very/very/deep/nesting/stinks/index.html')
       await fs.rmdir('./test-output', { recursive: true })
         .catch(err => t.end(err))
     })
@@ -22,6 +22,7 @@ test('The build function', async t => {
   await build({
     src: './test/data',
     dest: './test-output',
+    cleanUrls: false,
     extension: '.htm'
   })
     .catch(err => t.end(err))
