@@ -3,11 +3,17 @@ const build = require('../lib/build')
 const fs = require('fs').promises
 
 test('The build function', async t => {
+  await build({})
+    .then(() => {
+      t.fail('must throw an error if a template function is not provided.')
+    })
+    .catch(err => t.equal(err.message, 'You must provide a template function in the settings object passed to build.', 'throws an error if a template function is not provided.'))
 
   await build({
     src: './test/data',
-    dest: './test-output'
-  }).catch(err => t.end(err))
+    dest: './test-output',
+    templateFn: x => x
+  })
 
   fs.readFile('./test-output/marx-bros/groucho/index.html')
     .then(async data => {
@@ -27,8 +33,9 @@ test('The build function', async t => {
     src: './test/data',
     dest: './test-output',
     cleanUrls: false,
-    extension: '.htm'
-  }).catch(err => t.end(err))
+    extension: '.htm',
+    templateFn: x => x
+  })
 
   fs.readFile('./test-output/whatever.htm')
     .then(async data => {
