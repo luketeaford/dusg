@@ -3,12 +3,6 @@ const build = require('../lib/build')
 const fs = require('fs').promises
 
 test('The build function', async t => {
-  await build({})
-    .then(() => {
-      t.fail('must throw an error if a template function is not provided.')
-    })
-    .catch(err => t.equal(err.message, 'You must provide a template function in the settings object passed to build.', 'throws an error if a template function is not provided.'))
-
   await build({
     src: './test/data',
     dest: './test-output',
@@ -29,6 +23,22 @@ test('The build function', async t => {
       t.pass('changes the extensions of the files in the dest directory to ".html" if an extension is not provided.')
     })
 
+  fs.readFile('./test-output/no-content/index.html')
+    .then(() => {
+      t.fail('must not output a file if the template function returns an empty string.')
+    })
+    .catch(err => t.ok(err.message, 'does not output a file if the template function returns an empty string.'))
+
+  fs.readFile('./test-output/no-markdown/index.html')
+    .then(async data => {
+      t.ok(data.toString().includes('<title>No Markdown</title>'), 'works on source files that contain YAML but not markdown.')
+    })
+
+  fs.readFile('./test-output/no-yaml/index.html')
+    .then(async data => {
+      t.ok(data.toString().includes('<h1>No YAML</h1>'), 'works on source files that contain markdown but not YAML.')
+    })
+
   await build({
     src: './test/data',
     dest: './test-output',
@@ -37,10 +47,16 @@ test('The build function', async t => {
     templateFn: x => x
   })
 
-  fs.readFile('./test-output/whatever.htm')
+  fs.readFile('./test-output/curveball.htm')
     .then(async data => {
       t.pass('allows the extensions of the files to be configured.')
     })
+
+  await build({})
+    .then(() => {
+      t.fail('must throw an error if a template function is not provided.')
+    })
+    .catch(err => t.equal(err.message, 'You must provide a template function in the settings object passed to build.', 'throws an error if a template function is not provided.'))
 
   t.end()
 })
