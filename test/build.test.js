@@ -6,7 +6,12 @@ test('The build function', async t => {
   await build({
     src: './test/data',
     dest: './test-output',
-    templateFn: x => x
+    template: function (x) {
+      const { metadata, html } = x
+      return metadata || html
+        ? `<title>${metadata ? metadata.title : ''}</title>${html}`
+        : ''
+    }
   })
 
   fs.readFile('./test-output/marx-bros/groucho/index.html')
@@ -50,7 +55,7 @@ test('The build function', async t => {
     dest: './test-output',
     cleanUrls: false,
     extension: '.htm',
-    templateFn: x => x
+    template: x => x
   })
 
   fs.readFile('./test-output/curveball.htm')
