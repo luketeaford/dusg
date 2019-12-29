@@ -1,1 +1,5 @@
-Information about the Marx Brothers.
+---
+title: Index for Marx Bros
+---
+
+# Information about the Marx Brothers.

@@ -1,1 +1,5 @@
-# Has markdown but no yaml
+---
+title: Nevermind
+---
+
+# Has markdown and yaml

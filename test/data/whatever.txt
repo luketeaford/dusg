@@ -1,1 +1,5 @@
+---
+title: Whatever
+---
+
 Lorem ipsum.
