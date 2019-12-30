@@ -53,6 +53,12 @@ test('The build function', async t => {
       t.ok(data.toString().includes('<h1>No YAML</h1>'), 'works on source files that contain markdown but not YAML.')
     })
 
+  fs.readFile('./test-output/not-md/index.html')
+    .then(() => {
+      t.fail('must not output a file if the source file does not have a ".md" extension.')
+    })
+    .catch(err => t.ok(err.message, 'does not output a file if the source files does not have a ".md" extension.'))
+
   await build({
     src: './test/data',
     dest: './test-output',
