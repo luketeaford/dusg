@@ -48,11 +48,6 @@ test('The build function', async t => {
     })
     .catch(err => t.ok(err.message, 'does not output a directory if the template function returns an empty string.'))
 
-  fs.readFile('./test-output/no-markdown/index.html')
-    .then(async data => {
-      t.ok(data.toString().includes('<title>No Markdown</title>'), 'works on source files that contain YAML but not markdown.')
-    })
-
   fs.readFile('./test-output/no-yaml/index.html')
     .then(async data => {
       t.ok(data.toString().includes('<h1>No YAML</h1>'), 'works on source files that contain markdown but not YAML.')
