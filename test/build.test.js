@@ -2,16 +2,23 @@ const test = require('tape')
 const build = require('../lib/build')
 const fs = require('fs').promises
 
+const siteTemplate = function (x) {
+  const { metadata, html, siteInfo } = x
+  const nav = siteInfo
+    .filter(x => x.path.includes('./test-output/marx-bros'))
+    .reduce((acc, cur) => {
+      return `${acc}<a href="${cur.path}">${cur.metadata.title}</a>`
+    }, '')
+  return metadata || html
+    ? `<title>${metadata ? metadata.title : ''}</title>${html}${nav}`
+    : ''
+}
+
 test('The build function', async t => {
   await build({
     src: './test/data',
     dest: './test-output',
-    template: function (x) {
-      const { metadata, html } = x
-      return metadata || html
-        ? `<title>${metadata ? metadata.title : ''}</title>${html}`
-        : ''
-    }
+    template: siteTemplate
   })
 
   fs.readFile('./test-output/marx-bros/groucho/index.html')
@@ -19,6 +26,7 @@ test('The build function', async t => {
       const actualData = data.toString()
       t.ok(actualData.includes('<title>Groucho Marx</title>'), 'interprets YAML at the top of the source file as the metadata key.')
       t.ok(actualData.includes('<h1>A Heading about Groucho Marx</h1>'), 'interprets markdown in the source file as HTML.')
+      t.ok(actualData.includes('<a href="./test-output/marx-bros/harpo/index.html">Harpo Marx</a>'), 'passes the site info into the template function so that site maps can be built.')
     })
 
   fs.readFile('./test-output/very/very/very/deep/nesting/stinks/index.html')
