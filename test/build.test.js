@@ -64,11 +64,17 @@ test('The build function', async t => {
     dest: './test-output',
     cleanUrls: false,
     extension: '.htm',
-    template: x => x
+    template: x => {
+      return x && x.info ? `${x.info.title}${x.hypertext}` : ''
+    },
+    metadataKey: 'info',
+    htmlKey: 'hypertext'
   })
 
   fs.readFile('./test-output/curveball.htm')
     .then(async data => {
+      t.ok(data.toString().includes('configurable metadata key'), 'allows the metadata key to be configured.')
+      t.ok(data.toString().includes('configurable html key'), 'allows the html key to be configured.')
       t.pass('allows the extensions of the files to be configured.')
     })
 

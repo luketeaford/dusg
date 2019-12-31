@@ -1,5 +1,6 @@
 ---
-title: it's minified
+title: configurable metadata key
 ---
 
 # mnfd
+configurable html key
