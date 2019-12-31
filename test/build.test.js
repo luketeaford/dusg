@@ -23,10 +23,9 @@ test('The build function', async t => {
 
   fs.readFile('./test-output/marx-bros/groucho/index.html')
     .then(async data => {
-      const actualData = data.toString()
-      t.ok(actualData.includes('<title>Groucho Marx</title>'), 'interprets YAML at the top of the source file as the metadata key.')
-      t.ok(actualData.includes('<h1>A Heading about Groucho Marx</h1>'), 'interprets markdown in the source file as HTML.')
-      t.ok(actualData.includes('<a href="./test-output/marx-bros/harpo/index.html">Harpo Marx</a>'), 'passes the site info into the template function so that site maps can be built.')
+      t.ok(data.toString().includes('<title>Groucho Marx</title>'), 'interprets YAML at the top of the source file as the metadata key.')
+      t.ok(data.toString().includes('<h1>A Heading about Groucho Marx</h1>'), 'interprets markdown in the source file as HTML.')
+      t.ok(data.toString().includes('<a href="./test-output/marx-bros/harpo/index.html">Harpo Marx</a>'), 'passes the site info into the template function so that site maps can be built.')
     })
 
   fs.readFile('./test-output/very/very/very/deep/nesting/stinks/index.html')
@@ -64,9 +63,7 @@ test('The build function', async t => {
     dest: './test-output',
     cleanUrls: false,
     extension: '.htm',
-    template: x => {
-      return x && x.info ? `${x.info.title}${x.hypertext}` : ''
-    },
+    template: x => (x && x.info ? `${x.info.title}${x.hypertext}` : ''),
     metadataKey: 'info',
     htmlKey: 'hypertext'
   })
