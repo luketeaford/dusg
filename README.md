@@ -1,5 +1,5 @@
-# dusg
-Digital Universal Site Generator
+# DUSG
+Deluxe Universal Site Generator
 
 ## TODO
 - [ ] Add CLI
