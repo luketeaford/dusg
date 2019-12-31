@@ -75,7 +75,19 @@ test('The build function', async t => {
       t.pass('allows the extensions of the files to be configured.')
     })
 
-  await build({})
+  await build({ src: '' })
+    .then(() => {
+      t.fail('must throw an error if a source directory is not provided.')
+    })
+    .catch(err => t.equal(err.message, 'Settings must include a source directory.', 'throws an error if a source directory is not provided.'))
+
+  await build({ src: './test/data' })
+    .then(() => {
+      t.fail('must throw an error if a destination directory is not provided.')
+    })
+    .catch(err => t.equal(err.message, 'Settings must include a destination directory.', 'throws an error if a destination directory is not provided.'))
+
+  await build({ src: './test/data', dest: './test-output' })
     .then(() => {
       t.fail('must throw an error if a template function is not provided.')
     })
