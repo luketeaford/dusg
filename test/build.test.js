@@ -82,7 +82,7 @@ test('The build function', async t => {
     .then(() => {
       t.fail('must throw an error if a template function is not provided.')
     })
-    .catch(err => t.equal(err.message, 'You must provide a template function in the settings object passed to build.', 'throws an error if a template function is not provided.'))
+    .catch(err => t.equal(err.message, 'Settings must include a template function.', 'throws an error if a template function is not provided.'))
 
   t.end()
 })
