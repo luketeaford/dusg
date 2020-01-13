@@ -2,7 +2,9 @@
   "name": "dusg",
   "version": "0.0.1",
   "description": "Deluxe Universal Site Generator",
-  "main": "index.js",
+  "main": "./lib/build.js",
+  "bin": "./bin/dusg.js",
+  "man": "./man/dusg.1",
   "scripts": {
     "clean": "rm -rf coverage",
     "lint": "standard --fix",
