@@ -13,11 +13,25 @@ if (cliSettings.help || cliSettings.h) {
 } else if (cliSettings.version || cliSettings.v) {
   console.log(version)
 } else {
-  const template = require(`${process.cwd()}/${cliSettings.template}`)
+  const {
+    src, s,
+    dest, d,
+    template, t,
+    cleanUrls,
+    extension,
+    htmlKey,
+    metadataKey
+  } = cliSettings
+
+  const templateFunction = require(`${process.cwd()}/${template || t}`)
 
   build({
-    src: cliSettings.src || cliSettings.s,
-    dest: cliSettings.dest || cliSettings.d,
-    template
+    src: src || s,
+    dest: dest || d,
+    template: templateFunction,
+    cleanUrls,
+    extension,
+    htmlKey,
+    metadataKey
   })
 }
