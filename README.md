@@ -6,5 +6,10 @@ Deluxe Universal Site Generator
 ## Design Goals
 DUSG is a tool for generating static sites. Its primary purpose is to read a directory of source files and write files using JavaScript.
 
-## TODO
-- [ ] Add documentation
+## What it Does
+- [x] Use either the CLI or JavaScript API
+- [x] Read markdown files in a source directory
+- [x] Output files to a destination directory
+- [x] Use JavaScript (no templating languages)
+
+## Usage Examples
