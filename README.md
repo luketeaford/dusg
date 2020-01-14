@@ -7,10 +7,12 @@ Deluxe Universal Site Generator
 DUSG is a tool for generating static sites. Its primary purpose is to read a directory of source files and write files using JavaScript.
 
 ## What it Does
-- [x] Use either the CLI or JavaScript API
-- [x] Read markdown files in a source directory
-- [x] Output files to a destination directory
-- [x] Use JavaScript (no templating languages)
+- [x] Provides a Command Line Interface and a JavaScript API
+- [x] Reads Markdown files in a source directory
+- [x] Parses YAML in each file into a configurable key (default: 'metadata')
+- [x] Parses Markdown in each file into a configurable key (default: 'html')
+- [x] Uses a JavaScript function instead of templating languages
+- [x] Writes files to a destination directory
 
 ## Usage Examples
 
@@ -20,7 +22,7 @@ DUSG is a tool for generating static sites. Its primary purpose is to read a dir
 ```js
 const dusg = require('dusg')
 
-const aFunction = x => {
+const aTemplateFunction = x => {
   const { metadata, html } = x
   const { title } = metadata
   return `<!DOCTYPE html>
@@ -31,6 +33,6 @@ ${html}`
 dusg({
   src: './your-source-directory',
   dest: './your-destination-directory',
-  template: aFunction,
+  template: aTemplateFunction
 })
 ```
