@@ -13,3 +13,24 @@ DUSG is a tool for generating static sites. Its primary purpose is to read a dir
 - [x] Use JavaScript (no templating languages)
 
 ## Usage Examples
+
+### Command Line Interface (CLI)
+
+### JavaScript API
+```js
+const dusg = require('dusg')
+
+const aFunction = x => {
+  const { metadata, html } = x
+  const { title } = metadata
+  return `<!DOCTYPE html>
+<title>${title}</title>
+${html}`
+}
+
+dusg({
+  src: './your-source-directory',
+  dest: './your-destination-directory',
+  template: aFunction,
+})
+```
