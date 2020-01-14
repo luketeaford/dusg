@@ -7,8 +7,10 @@
   "man": "./man/dusg.1",
   "scripts": {
     "clean": "rm -rf coverage",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "standard --fix",
-    "test": "NODE_ENV=test nyc tape test/*.test.js"
+    "prepublishOnly": "npm run lint && npm test",
+    "test": "nyc --reporter=lcov tape test/*.test.js | tap-spec"
   },
   "repository": {
     "type": "git",
@@ -29,8 +31,10 @@
   },
   "homepage": "https://github.com/luketeaford/dusg#readme",
   "devDependencies": {
+    "coveralls": "^3.0.9",
     "nyc": "^15.0.0",
     "standard": "^14.3.1",
+    "tap-spec": "^5.0.0",
     "tape": "^4.13.0"
   },
   "dependencies": {
