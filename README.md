@@ -27,7 +27,7 @@ npm install --save-dev dusg
 
 
 ### Command Line Interface (CLI)
-```bash
+```console
 # Simplest usage
 dusg --src='./your-source-directory' --dest='./your-destination-directory' --template='./your-template.js'
 
@@ -41,14 +41,7 @@ dusg --help
 ### JavaScript API
 ```js
 const dusg = require('dusg')
-
-const aTemplateFunction = x => {
-  const { metadata, html } = x
-  const { title } = metadata
-  return `<!DOCTYPE html>
-<title>${title}</title>
-${html}`
-}
+const aTemplateFunction = require('./your-template.js')
 
 dusg({
   src: './your-source-directory',
@@ -57,4 +50,8 @@ dusg({
 })
 ```
 
-#### Other Options
+### Other Options
+  - cleanUrls means each file will be written to a directory so './about-me.md' would become './about-me/index.html'. This is enabled by default.
+  - htmlKey is the name of the key in the object passed to the template function. The value is the parsed Markdown. The default is 'html'.
+  - metadataKey is the name of the key in the object passed to the template function. The value is the parsed YAML. The default is 'metadata'.
+  - extension is the file extension to write. The default is '.html'.
