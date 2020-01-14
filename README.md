@@ -15,9 +15,28 @@ DUSG is a tool for generating static sites. Its primary purpose is to read a dir
 - [x] Uses a JavaScript function instead of templating languages
 - [x] Writes files to a destination directory
 
-## Usage Examples
+### Usage Guidelines
+## Installation
+```bash
+npm install --save-dev dusg
+```
+
+### Formatting Source Files
+
+### Writing Template Functions
+
 
 ### Command Line Interface (CLI)
+```bash
+# Simplest usage
+dusg --src='./your-source-directory' --dest='./your-destination-directory' --template='./your-template.js'
+
+# Aliases are supported
+dusg -s './your-source-directory' -d './your-destination-directory' -t './your-template.js'
+
+# Show detailed documentation
+dusg --help
+```
 
 ### JavaScript API
 ```js
@@ -37,3 +56,5 @@ dusg({
   template: aTemplateFunction
 })
 ```
+
+#### Other Options
