@@ -2,9 +2,9 @@ const test = require('tape')
 const build = require('../lib/build')
 const fs = require('fs').promises
 
-const siteTemplate = function (x) {
-  const { metadata, html, siteInfo } = x
-  const nav = siteInfo
+const siteTemplate = x => {
+  const { metadata, html, files } = x
+  const nav = files
     .filter(x => x.path.includes('./test-output/marx-bros'))
     .reduce((acc, cur) => {
       return `${acc}<a href="${cur.path}">${cur.metadata.title}</a>`
@@ -63,15 +63,20 @@ test('The build function', async t => {
     dest: './test-output',
     cleanUrls: false,
     extension: '.htm',
-    template: x => (x && x.info ? `${x.info.title}${x.hypertext}` : ''),
+    template: x => (x && x.info
+      ? `${x.info.title}${x.hypertext}${x.siteFiles ? 'files key' : ''}`
+      : ''
+    ),
     metadataKey: 'info',
-    htmlKey: 'hypertext'
+    htmlKey: 'hypertext',
+    filesKey: 'siteFiles'
   })
 
   fs.readFile('./test-output/curveball.htm')
     .then(async data => {
       t.ok(data.toString().includes('configurable metadata key'), 'allows the metadata key to be configured.')
       t.ok(data.toString().includes('configurable html key'), 'allows the html key to be configured.')
+      t.ok(data.toString().includes('files key'), 'allows the files key to be configured.')
       t.pass('allows the extensions of the files to be configured.')
     })
 
