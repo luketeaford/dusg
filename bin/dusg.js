@@ -20,7 +20,8 @@ if (cliSettings.help || cliSettings.h) {
     cleanUrls,
     extension,
     htmlKey,
-    metadataKey
+    metadataKey,
+    filesKey
   } = cliSettings
 
   const templateFunction = require(`${process.cwd()}/${template || t}`)
@@ -32,6 +33,7 @@ if (cliSettings.help || cliSettings.h) {
     cleanUrls,
     extension,
     htmlKey,
-    metadataKey
+    metadataKey,
+    filesKey
   })
 }
