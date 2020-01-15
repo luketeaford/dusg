@@ -1,3 +1,5 @@
+<img alt="" src="dusg-logo.png">
+
 # DUSG
 Deluxe Universal Site Generator
 
