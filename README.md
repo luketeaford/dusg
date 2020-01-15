@@ -32,11 +32,22 @@ author: Luke Teaford
 
 # Hello, World!
 
-This will be used to generate a static page.
+This will be used to generate a static page. The metadata can contain whatever you want.
 ```
 
 ## Writing Template Functions
+A suitable template function is a callback that will receive the site object as its only argument. The site object has configurable keys for html, metadata, and files. The html key contains the markdown parsed as HTML. The metadata key contains the YAML parsed as a JavaScript object. The files key contains an array of all source files. Each file has an html, metadata and path key. The path is the path to the output file which is useful for generating navigation.
 
+### Example Template Function
+```js
+const exampleTemplate = function (siteObject) {
+  const { html, metadata } = siteObject
+  const { title, author } = metadata
+  return `<!DOCTYPE html>
+<title>${title} - ${author}</title>
+${html}`
+}
+```
 
 ## Command Line Interface (CLI)
 ```console
