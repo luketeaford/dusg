@@ -21,6 +21,19 @@ npm install --save-dev dusg
 ```
 
 ## Formatting Source Files
+Source files must end with the '.md' extension. A source file may begin with YAML which should begin and end with three hyphens ('---'). Markdown within the file will be parsed and turned into HTML.
+
+### Example Source File
+```md
+---
+title: An Example Source File
+author: Luke Teaford
+---
+
+# Hello, World!
+
+This will be used to generate a static page.
+```
 
 ## Writing Template Functions
 
