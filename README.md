@@ -77,4 +77,5 @@ dusg({
   - cleanUrls means each file will be written to a directory so './about-me.md' would become './about-me/index.html'. This is enabled by default.
   - htmlKey is the name of the key in the object passed to the template function. The value is the parsed Markdown. The default is 'html'.
   - metadataKey is the name of the key in the object passed to the template function. The value is the parsed YAML. The default is 'metadata'.
+  - filesKey is the name of the key in the object passed to the template function. The value is an array of the source files. The default is 'files'.
   - extension is the file extension to write. The default is '.html'.
