@@ -52,7 +52,7 @@ ${html}`
 }
 ```
 
-## Command Line Interface (CLI)
+## Command Line Interface
 ```console
 # Simplest usage
 npx dusg --src='./your-source' --dest='./your-destination' --template='./your-template.js'
