@@ -24,7 +24,9 @@ if (cliSettings.help || cliSettings.h) {
     filesKey
   } = cliSettings
 
-  const templateFunction = require(`${process.cwd()}/${template || t}`)
+  const templateFunction = template || t
+    ? require(`${process.cwd()}/${template || t}`)
+    : undefined
 
   build({
     src: src || s,
