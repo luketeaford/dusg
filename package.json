@@ -5,6 +5,11 @@
   "main": "./lib/build.js",
   "bin": "./bin/dusg.js",
   "man": "./man/dusg.1",
+  "files": [
+    "bin/",
+    "lib/",
+    "man/"
+  ],
   "scripts": {
     "clean": "rm -rf coverage",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
