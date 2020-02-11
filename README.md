@@ -39,7 +39,7 @@ The metadata can contain whatever you want.
 ```
 
 ## Writing Template Functions
-A suitable template function is a callback that will receive the site object as its only argument. The site object has configurable keys for html, metadata and files. The html key contains the markdown parsed as HTML. The metadata key contains the YAML parsed as a JavaScript object. The files key contains an array of all source files. Each file has an html, metadata and path key. The path is the path to the output file which is useful for generating navigation.
+A suitable template function is a callback that will receive the site object as its only argument. The site object has configurable keys for html, metadata, files, path and inputPath. The html key contains the markdown parsed as HTML. The metadata key contains the YAML parsed as a JavaScript object. The files key contains an array of all source files. The path key contains the output path of the file. The inputPath key contains the inputPath of the file.
 
 ### Example Template Function
 ```js
@@ -81,4 +81,6 @@ dusg({
   - htmlKey is the name of the key in the object passed to the template function. The value is the parsed Markdown. The default is 'html'.
   - metadataKey is the name of the key in the object passed to the template function. The value is the parsed YAML. The default is 'metadata'.
   - filesKey is the name of the key in the object passed to the template function. The value is an array of the source files. The default is 'files'.
+  - pathKey is the name of the key in the object passed to the template function. The value is the output path. The default is 'path'.
+  - inputPathKey is the name of the key in the object passed to the template function. The value is the input path. The default is 'inputPath'.
   - extension is the file extension to write. The default is '.html'.
