@@ -72,12 +72,24 @@ test('The build function', async t => {
     filesKey: 'siteFiles'
   })
 
+  // TODO files key test is brittle
   fs.readFile('./test-output/curveball.htm')
     .then(async data => {
       t.ok(data.toString().includes('configurable metadata key'), 'allows the metadata key to be configured.')
       t.ok(data.toString().includes('configurable html key'), 'allows the html key to be configured.')
       t.ok(data.toString().includes('files key'), 'allows the files key to be configured.')
       t.pass('allows the extensions of the files to be configured.')
+    })
+
+  await build({
+    src: './test/data',
+    dest: './test-output',
+    template: x => x.inputPath
+  })
+
+  fs.readFile('./test-output/marx-bros/index.html')
+    .then(async data => {
+      t.equal(data.toString(), './test/data/marx-bros/index.md', 'includes the original path of each file as the inputPath key.')
     })
 
   await build({ src: '' })
