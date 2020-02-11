@@ -58,26 +58,47 @@ test('The build function', async t => {
     })
     .catch(err => t.ok(err.message, 'does not output a file if the source files does not have a ".md" extension.'))
 
+  const testCustomKeysTemplate = x => {
+    if (!x) return ''
+
+    let result = ''
+    const { info, hypertext, siteFiles, outputPath, sourcePath } = x
+    if (info) {
+      const { title } = info
+      result += `${title}${hypertext}`
+    }
+    if (siteFiles) {
+      result += 'configurable files key'
+    }
+    if (outputPath) {
+      result += 'configurable path key'
+    }
+    if (sourcePath) {
+      result += 'configurable input path key'
+    }
+    return result
+  }
+
   await build({
     src: './test/data',
     dest: './test-output',
     cleanUrls: false,
     extension: '.htm',
-    template: x => (x && x.info
-      ? `${x.info.title}${x.hypertext}${x.siteFiles ? 'files key' : ''}`
-      : ''
-    ),
+    template: testCustomKeysTemplate,
     metadataKey: 'info',
     htmlKey: 'hypertext',
-    filesKey: 'siteFiles'
+    filesKey: 'siteFiles',
+    pathKey: 'outputPath',
+    inputPathKey: 'sourcePath'
   })
 
-  // TODO files key test is brittle
   fs.readFile('./test-output/curveball.htm')
     .then(async data => {
       t.ok(data.toString().includes('configurable metadata key'), 'allows the metadata key to be configured.')
       t.ok(data.toString().includes('configurable html key'), 'allows the html key to be configured.')
-      t.ok(data.toString().includes('files key'), 'allows the files key to be configured.')
+      t.ok(data.toString().includes('configurable files key'), 'allows the files key to be configured.')
+      t.ok(data.toString().includes('configurable path key'), 'allows the path key to be configured.')
+      t.ok(data.toString().includes('configurable input path key'), 'allows the inputPath key to be configured.')
       t.pass('allows the extensions of the files to be configured.')
     })
 
