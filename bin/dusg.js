@@ -21,7 +21,8 @@ if (cliSettings.help || cliSettings.h) {
     extension,
     htmlKey,
     metadataKey,
-    filesKey
+    filesKey,
+    inputPathKey
   } = cliSettings
 
   const templateFunction = template || t
@@ -36,6 +37,7 @@ if (cliSettings.help || cliSettings.h) {
     extension,
     htmlKey,
     metadataKey,
-    filesKey
+    filesKey,
+    inputPathKey
   })
 }

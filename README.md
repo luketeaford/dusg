@@ -83,4 +83,5 @@ dusg({
   - filesKey is the name of the key in the object passed to the template function. The value is an array of the source files. The default is 'files'.
   - pathKey is the name of the key in the object passed to the template function. The value is the output path. The default is 'path'.
   - inputPathKey is the name of the key in the object passed to the template function. The value is the input path. The default is 'inputPath'.
+  - destKey is the name of the key in the object passed to the template function. The value is the dest path. The default is 'dest'.
   - extension is the file extension to write. The default is '.html'.

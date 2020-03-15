@@ -62,7 +62,7 @@ test('The build function', async t => {
     if (!x) return ''
 
     let result = ''
-    const { info, hypertext, siteFiles, outputPath, sourcePath } = x
+    const { info, hypertext, siteFiles, outputDir, outputPath, sourcePath } = x
     if (info) {
       const { title } = info
       result += `${title}${hypertext}`
@@ -75,6 +75,9 @@ test('The build function', async t => {
     }
     if (sourcePath) {
       result += 'configurable input path key'
+    }
+    if (outputDir) {
+      result += 'configurable dest key'
     }
     return result
   }
@@ -89,7 +92,8 @@ test('The build function', async t => {
     htmlKey: 'hypertext',
     filesKey: 'siteFiles',
     pathKey: 'outputPath',
-    inputPathKey: 'sourcePath'
+    inputPathKey: 'sourcePath',
+    destKey: 'outputDir'
   })
 
   fs.readFile('./test-output/curveball.htm')
@@ -99,6 +103,7 @@ test('The build function', async t => {
       t.ok(data.toString().includes('configurable files key'), 'allows the files key to be configured.')
       t.ok(data.toString().includes('configurable path key'), 'allows the path key to be configured.')
       t.ok(data.toString().includes('configurable input path key'), 'allows the inputPath key to be configured.')
+      t.ok(data.toString().includes('configurable dest key'), 'allows the dest key to be configured.')
       t.pass('allows the extensions of the files to be configured.')
     })
 
