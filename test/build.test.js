@@ -6,7 +6,7 @@ const buildSiteMap = function (aPageObject) {
   // Look at the entire page and organize files
   // IDEA: Something like this...
   // siteMap.writing.essays['godard-melodrama']
-  const siteMap = 'a map of the site files'
+  const siteMap = 'a site map'
 
   return { ...aPageObject, siteMap }
 }
@@ -135,7 +135,7 @@ test('The build function', async t => {
 
   fs.readFile('./test-output/marx-bros/index.html')
     .then(async data => {
-      t.ok(data.toString().includes, 'a map of the site files', 'can make a sitemap or whatever')
+      t.equal(data.toString(), 'a site map', 'can make a sitemap or whatever.')
     })
     .catch(err => t.fail(err))
 
