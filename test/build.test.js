@@ -2,14 +2,28 @@ const test = require('tape')
 const build = require('../lib/build')
 const fs = require('fs').promises
 
+const buildSiteMap = function (aPageObject) {
+  // Look at the entire page and organize files
+  // IDEA: Something like this...
+  // siteMap.writing.essays['godard-melodrama']
+  const siteMap = 'a map of the site files'
+
+  return { ...aPageObject, siteMap }
+}
+
 const simpleTemplate = x => {
-  const { metadata, html, siteMap } = x
+  const { metadata, html } = x
 
   if (metadata && metadata.private === true) return
 
   return metadata || html
-    ? `<title>${metadata ? metadata.title : ''}</title>${html}${siteMap}`
+    ? `<title>${metadata ? metadata.title : ''}</title>${html}`
     : ''
+}
+
+const siteMapTemplate = x => {
+  const { siteMap } = x
+  return siteMap
 }
 
 test('The build function', async t => {
@@ -108,6 +122,20 @@ test('The build function', async t => {
       t.ok(data.toString().includes('configurable path key'), 'allows the path key to be configured.')
 
       t.pass('allows the extensions of the files to be configured.')
+    })
+    .catch(err => t.fail(err))
+
+  // Test preprocessor option
+  await build({
+    src: './test/data',
+    dest: './test-output',
+    template: siteMapTemplate,
+    preprocessor: buildSiteMap
+  })
+
+  fs.readFile('./test-output/marx-bros/index.html')
+    .then(async data => {
+      t.ok(data.toString().includes, 'a map of the site files', 'can make a sitemap or whatever')
     })
     .catch(err => t.fail(err))
 
