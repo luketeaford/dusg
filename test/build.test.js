@@ -2,28 +2,14 @@ const test = require('tape')
 const build = require('../lib/build')
 const fs = require('fs').promises
 
-const buildSiteMap = function (aPageObject) {
-  // Look at the entire page and organize files
-  // IDEA: Something like this...
-  // siteMap.writing.essays['godard-melodrama']
-  const siteMap = 'a site map'
-
-  return { ...aPageObject, siteMap }
-}
-
 const simpleTemplate = x => {
-  const { metadata, html } = x
+  const { metadata, html, siteMap } = x
 
   if (metadata && metadata.private === true) return
 
   return metadata || html
-    ? `<title>${metadata ? metadata.title : ''}</title>${html}`
+    ? `<title>${metadata ? metadata.title : ''}</title>${html}${siteMap}`
     : ''
-}
-
-const siteMapTemplate = x => {
-  const { siteMap } = x
-  return siteMap
 }
 
 test('The build function', async t => {
@@ -53,6 +39,13 @@ test('The build function', async t => {
       t.ok(data, 'moves files in the source directory to a parallel structure in the dest directory.')
       t.pass('uses clean urls by default so that every page becomes an index page in a directory named by the source filename.')
       t.pass('changes the extensions of the files in the dest directory to ".html" if an extension is not provided.')
+    })
+    .catch(err => t.fail(err))
+
+  // Test siteMap
+  fs.readFile('./test-output/marx-bros/index.html')
+    .then(async data => {
+      t.ok(data.toString().includes('a site map'), 'can make a sitemap or whatever.')
     })
     .catch(err => t.fail(err))
 
@@ -122,20 +115,6 @@ test('The build function', async t => {
       t.ok(data.toString().includes('configurable path key'), 'allows the path key to be configured.')
 
       t.pass('allows the extensions of the files to be configured.')
-    })
-    .catch(err => t.fail(err))
-
-  // Test preprocessor option
-  await build({
-    src: './test/data',
-    dest: './test-output',
-    template: siteMapTemplate,
-    preprocessor: buildSiteMap
-  })
-
-  fs.readFile('./test-output/marx-bros/index.html')
-    .then(async data => {
-      t.equal(data.toString(), 'a site map', 'can make a sitemap or whatever.')
     })
     .catch(err => t.fail(err))
 
