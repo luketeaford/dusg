@@ -39,7 +39,7 @@ The metadata can contain whatever you want.
 ```
 
 ## Writing Template Functions
-A suitable template function is a callback that will receive the site object as its only argument. The site object has configurable keys for html, metadata, files, path and inputPath. The html key contains the markdown parsed as HTML. The metadata key contains the YAML parsed as a JavaScript object. The files key contains an array of all source files. The path key contains the output path of the file. The inputPath key contains the inputPath of the file.
+A suitable template function is a callback that will receive the site object as its only argument. The site object has configurable keys for html, metadata and path. The html key contains the markdown parsed as HTML. The metadata key contains the YAML parsed as a JavaScript object. The path key contains the output path of the file.
 
 ### Example Template Function
 ```js
@@ -78,10 +78,8 @@ dusg({
 
 ### Other Options
   - cleanUrls means each file will be written to a directory so './about-me.md' would become './about-me/index.html'. This is enabled by default.
+  - extension is the file extension to write. The default is '.html'.
+  - preprocessor is a callback that will receive the site object as its only argument.
   - htmlKey is the name of the key in the object passed to the template function. The value is the parsed Markdown. The default is 'html'.
   - metadataKey is the name of the key in the object passed to the template function. The value is the parsed YAML. The default is 'metadata'.
-  - filesKey is the name of the key in the object passed to the template function. The value is an array of the source files. The default is 'files'.
   - pathKey is the name of the key in the object passed to the template function. The value is the output path. The default is 'path'.
-  - inputPathKey is the name of the key in the object passed to the template function. The value is the input path. The default is 'inputPath'.
-  - destKey is the name of the key in the object passed to the template function. The value is the dest path. The default is 'dest'.
-  - extension is the file extension to write. The default is '.html'.
