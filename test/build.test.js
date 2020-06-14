@@ -87,33 +87,16 @@ test('The build function', async t => {
     .catch(err => t.ok(err.message, 'does not output a file if the template returns an empty string.'))
 
   // Test configurations
-  const testCustomKeysTemplate = x => {
-    const { info, hypertext, outputPath } = x
-    return info && hypertext && outputPath
-      ? 'configurable metadata key configurable html key configurable path key'
-      : ''
-  }
-
   await build({
     src: './test/data',
     dest: './test-output',
     cleanUrls: false,
     extension: '.htm',
-    template: testCustomKeysTemplate,
-    metadataKey: 'info',
-    htmlKey: 'hypertext',
-    filesKey: 'siteFiles',
-    pathKey: 'outputPath',
-    inputPathKey: 'sourcePath',
-    destKey: 'outputDir'
+    template: simpleTemplate
   })
 
   fs.readFile('./test-output/curveball.htm')
     .then(async data => {
-      t.ok(data.toString().includes('configurable metadata key'), 'allows the metadata key to be configured.')
-      t.ok(data.toString().includes('configurable html key'), 'allows the html key to be configured.')
-      t.ok(data.toString().includes('configurable path key'), 'allows the path key to be configured.')
-
       t.pass('allows the extensions of the files to be configured.')
     })
     .catch(err => t.fail(err))
