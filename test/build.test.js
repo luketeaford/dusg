@@ -7,8 +7,12 @@ const simpleTemplate = x => {
 
   if (metadata && metadata.private === true) return
 
+  const grouchoPage = siteMap['./test-output/marx-bros/groucho/index.html'] || {}
+  const { href, title } = grouchoPage
+  const grouchoLink = `<a href='${href}'>${title}</a>`
+
   return metadata || html
-    ? `<title>${metadata ? metadata.title : ''}</title>${html}${siteMap}`
+    ? `<title>${metadata ? metadata.title : ''}</title>${html}Site map:${grouchoLink}`
     : ''
 }
 
@@ -45,7 +49,7 @@ test('The build function', async t => {
   // Test siteMap
   fs.readFile('./test-output/marx-bros/index.html')
     .then(async data => {
-      t.ok(data.toString().includes('a site map'), 'can make a sitemap or whatever.')
+      t.ok(data.toString().includes('./test-output/marx-bros/groucho/index.html'), 'includes an object for each file with href and title attributes.')
     })
     .catch(err => t.fail(err))
 
