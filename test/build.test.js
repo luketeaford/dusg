@@ -7,9 +7,9 @@ const simpleTemplate = x => {
 
   if (metadata && metadata.private === true) return
 
-  const grouchoPage = siteMap['./test-output/marx-bros/groucho/index.html'] || {}
-  const { href, title } = grouchoPage
-  const grouchoLink = `<a href='${href}'>${title}</a>`
+  const grouchoPage = siteMap['/marx-bros/groucho/index.html'] || {}
+  const { path, title } = grouchoPage
+  const grouchoLink = `<a href='${path}'>${title}</a>`
 
   return metadata || html
     ? `<title>${metadata ? metadata.title : ''}</title>${html}Site map:${grouchoLink}`
