@@ -12,9 +12,9 @@ DUSG is a static site generator that uses JavaScript instead of templating langu
 ## What it Does
 - [x] Provides a Command Line Interface and a JavaScript API
 - [x] Reads Markdown files in a source directory
-- [x] Parses YAML in each file into a configurable key (default: 'metadata')
-- [x] Parses Markdown in each file into a configurable key (default: 'html')
-- [x] Creates an array of parsed files into a configurable key (default: 'files')
+- [x] Parses YAML in each file into the key 'metadata'
+- [x] Parses Markdown in each file into the key 'html'
+- [x] Creates an array of parsed files into the key 'siteMap'
 - [x] Uses a JavaScript function instead of templating languages
 - [x] Writes files to a destination directory
 
@@ -39,7 +39,7 @@ The metadata can contain whatever you want.
 ```
 
 ## Writing Template Functions
-A suitable template function is a callback that will receive the site object as its only argument. The site object has configurable keys for html, metadata and path. The html key contains the markdown parsed as HTML. The metadata key contains the YAML parsed as a JavaScript object. The path key contains the output path of the file.
+A suitable template function is a callback that will receive the site object as its only argument. The html key contains the markdown parsed as HTML. The metadata key contains the YAML parsed as a JavaScript object. The path key contains the output path of the file.
 
 ### Example Template Function
 ```js
@@ -79,6 +79,3 @@ dusg({
 ### Other Options
   - cleanUrls means each file will be written to a directory so './about-me.md' would become './about-me/index.html'. This is enabled by default.
   - extension is the file extension to write. The default is '.html'.
-  - htmlKey is the name of the key in the object passed to the template function. The value is the parsed Markdown. The default is 'html'.
-  - metadataKey is the name of the key in the object passed to the template function. The value is the parsed YAML. The default is 'metadata'.
-  - pathKey is the name of the key in the object passed to the template function. The value is the output path. The default is 'path'.
