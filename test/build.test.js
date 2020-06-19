@@ -66,18 +66,6 @@ test('The build function', async t => {
     })
     .catch(err => t.ok(err.message, 'does not output a file if the source file does not have a ".md" extension.'))
 
-  fs.readdir('./test-output/no-content')
-    .then(() => {
-      t.fail('must not output a directory if the source file does not contain markdown.')
-    })
-    .catch(err => t.ok(err.message, 'does not output a directory if the source file does not contain markdown.'))
-
-  fs.readFile('./test-output/no-content/index.html')
-    .then(() => {
-      t.fail('must not output a file if the source file does not contain markdown.')
-    })
-    .catch(err => t.ok(err.message, 'does not output a file if the source file does not contain markdown.'))
-
   fs.readdir('./test-output/private-metadata')
     .then(() => {
       t.fail('must not output a directory if the template returns an empty string.')
