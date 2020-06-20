@@ -1,2 +1,3 @@
 language: node_js
+script: npm run test:travis
 after_success: npm run coverage

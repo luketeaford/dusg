@@ -16,7 +16,8 @@
     "lint": "standard --fix",
     "prepublishOnly": "npm run lint && npm test",
     "pretest": "./bin/dusg.js --src='./test/data' --dest='./test-output/test-cli' --template='./test/simple-template.js' && ./bin/dusg.js -s './test/data' -d './test-output/test-cli' -t './test/title-template.js' --clean-urls=false --extension='.txt'",
-    "test": "nyc --reporter=lcov tape test/*.test.js | tap-spec"
+    "test": "nyc --reporter=lcov tape test/*.test.js | tap-spec",
+    "test:travis": "npm run pretest && nyc --reporter=lcov tape test/*.test.js"
   },
   "repository": {
     "type": "git",
