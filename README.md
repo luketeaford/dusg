@@ -7,7 +7,7 @@ Deluxe Universal Site Generator
 [![Coverage Status](https://coveralls.io/repos/github/luketeaford/dusg/badge.svg)](https://coveralls.io/github/luketeaford/dusg)
 
 ## Design Goals
-DUSG is a static site generator that uses JavaScript instead of templating languages.
+DUSG is a static site generator that uses JavaScript instead of templating languages. It uses the file system instead of a database.
 
 ## What it Does
 - [x] Provides a Command Line Interface and a JavaScript API
