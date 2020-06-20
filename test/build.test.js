@@ -128,6 +128,7 @@ test('The build function', async t => {
     .then(async data => {
       t.equal(data.toString(), 'Harpo Marx', 'can be called from the command line and all the options and single-letter aliases are supported.')
     })
+    .catch(err => t.fail(err))
 
   t.end()
 })
