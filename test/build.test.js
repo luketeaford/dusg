@@ -119,9 +119,15 @@ test('The build function', async t => {
     .then(async data => {
       t.ok(data.toString().includes('<title>Welcome to my webpage!</title>'), 'parses YAML at the top of a source file and assigns the value to the metadata key.')
 
-      t.ok(data.toString().includes('<h1>Hello, world!</h1>'), 'parses markdown in a source file and assigns the value to the html key.')
+      t.ok(data.toString().includes('<h1>Hello, world!</h1>'), 'can be called from the command line.')
     })
     .catch(err => t.fail(err))
+
+  // Test CLI aliases and settings
+  fs.readFile('./test-output/test-cli/marx-bros/harpo.txt')
+    .then(async data => {
+      t.equal(data.toString(), 'Harpo Marx', 'can be called from the command line and all the options and single-letter aliases are supported.')
+    })
 
   t.end()
 })
