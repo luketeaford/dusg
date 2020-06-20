@@ -39,7 +39,7 @@ The metadata can contain whatever you want.
 ```
 
 ## Writing Template Functions
-A suitable template function is a callback that will receive the site object as its only argument. The html key contains the markdown parsed as HTML. The metadata key contains the YAML parsed as a JavaScript object. The path key contains the output path of the file.
+A suitable template function is a callback that will receive a page object as its only argument. The page object has an html key that contains the markdown parsed as HTML, a metadata key that contains the YAML parsed as a JavaScript object, a path key that contains the output path of the file, and a siteMap object. The siteMap object's keys are all pages' paths relative to the destination directory. Each key in the siteMap contains that page's `pageObject`.
 
 ### Example Template Function
 ```js
