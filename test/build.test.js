@@ -2,25 +2,25 @@ const test = require('tape')
 const build = require('../lib/build')
 const fs = require('fs').promises
 
-const simpleTemplate = x => {
-  const { metadata, html, siteMap } = x
-
+const minimalTemplate = x => {
+  const { metadata, html } = x
   if (metadata && metadata.private === true) return
+  return `<title>${metadata && metadata.title}</title>${html}`
+}
 
-  const grouchoPage = siteMap['/marx-bros/groucho/index.html'] || {}
-  const { path, metadata: pageMetadata } = grouchoPage
-  const grouchoLink = `<a href='${path}'>${pageMetadata && pageMetadata.title}</a>`
+const siteMapTemplate = x => {
+  const { siteMap } = x
 
-  return metadata || html
-    ? `<title>${metadata ? metadata.title : ''}</title>${html}Site map:${grouchoLink}`
-    : ''
+  const { path, metadata: pageMetadata } = siteMap['/marx-bros/groucho/index.html']
+
+  return `<a href="${path}">${pageMetadata && pageMetadata.title}</a>`
 }
 
 test('The build function', async t => {
   await build({
     src: './test/data',
     dest: './test-output',
-    template: simpleTemplate
+    template: minimalTemplate
   })
 
   // Test parsing YAML and markdown
@@ -43,13 +43,6 @@ test('The build function', async t => {
       t.ok(data, 'moves files in the source directory to a parallel structure in the dest directory.')
       t.pass('uses clean urls by default so that every page becomes an index page in a directory named by the source filename.')
       t.pass('changes the extensions of the files in the dest directory to ".html" if an extension is not provided.')
-    })
-    .catch(err => t.fail(err))
-
-  // Test siteMap
-  fs.readFile('./test-output/marx-bros/index.html')
-    .then(async data => {
-      t.ok(data.toString().includes('./test-output/marx-bros/groucho/index.html'), 'includes an object for each file with href and title attributes.')
     })
     .catch(err => t.fail(err))
 
@@ -78,16 +71,29 @@ test('The build function', async t => {
     })
     .catch(err => t.ok(err.message, 'does not output a file if the template returns an empty string.'))
 
+  // Test site map
+  await build({
+    src: './test/data',
+    dest: './test-output/test-site-map',
+    template: siteMapTemplate
+  })
+
+  fs.readFile('./test-output/test-site-map/marx-bros/index.html')
+    .then(async data => {
+      t.equal(data.toString(), '<a href="./test-output/test-site-map/marx-bros/groucho/index.html">Groucho Marx</a>', 'includes a siteMap object with keys for the path of each file.')
+    })
+    .catch(err => t.fail(err))
+
   // Test configurations
   await build({
     src: './test/data',
-    dest: './test-output',
+    dest: './test-output/test-configuration',
     cleanUrls: false,
     extension: '.htm',
-    template: simpleTemplate
+    template: x => 'any data'
   })
 
-  fs.readFile('./test-output/curveball.htm')
+  fs.readFile('./test-output/test-configuration/curveball.htm')
     .then(async data => {
       t.pass('allows the extensions of the files to be configured.')
     })
@@ -116,6 +122,5 @@ test('The build function', async t => {
 })
 
 test.onFinish(async () => {
-  await fs.unlink('./test-output.htm')
   await fs.rmdir('./test-output', { recursive: true })
 })
