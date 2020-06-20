@@ -44,8 +44,8 @@ A suitable template function is a callback that will receive a page object as it
 
 ### Example Template Function
 ```js
-const exampleTemplate = function (siteObject) {
-  const { html, metadata } = siteObject
+const exampleTemplate = function (aPageObject) {
+  const { html, metadata } = aPageObject
   const { title, author } = metadata
   return `<!DOCTYPE html>
 <title>${title} - ${author}</title>
