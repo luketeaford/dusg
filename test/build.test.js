@@ -2,25 +2,15 @@ const test = require('tape')
 const build = require('../lib/build')
 const fs = require('fs').promises
 
-const minimalTemplate = x => {
-  const { metadata, html } = x
-  if (metadata && metadata.private === true) return
-  return `<title>${metadata && metadata.title}</title>${html}`
-}
-
-const siteMapTemplate = x => {
-  const { siteMap } = x
-
-  const { path, metadata: pageMetadata } = siteMap['/marx-bros/groucho/index.html']
-
-  return `<a href="${path}">${pageMetadata && pageMetadata.title}</a>`
-}
-
 test('The build function', async t => {
   await build({
     src: './test/data',
     dest: './test-output',
-    template: minimalTemplate
+    template: aPageObject => {
+      const { metadata, html } = aPageObject
+      if (metadata && metadata.private === true) return
+      return `<title>${metadata && metadata.title}</title>${html}`
+    }
   })
 
   // Test parsing YAML and markdown
@@ -75,7 +65,13 @@ test('The build function', async t => {
   await build({
     src: './test/data',
     dest: './test-output/test-site-map',
-    template: siteMapTemplate
+    template: aPageObject => {
+      const { siteMap } = aPageObject
+
+      const { path, metadata: pageMetadata } = siteMap['/marx-bros/groucho/index.html']
+
+      return `<a href="${path}">${pageMetadata && pageMetadata.title}</a>`
+    }
   })
 
   fs.readFile('./test-output/test-site-map/marx-bros/index.html')
@@ -90,7 +86,7 @@ test('The build function', async t => {
     dest: './test-output/test-configuration',
     cleanUrls: false,
     extension: '.htm',
-    template: x => 'any data'
+    template: aPageObject => 'any data'
   })
 
   fs.readFile('./test-output/test-configuration/curveball.htm')
