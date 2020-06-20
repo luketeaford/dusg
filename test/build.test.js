@@ -114,6 +114,15 @@ test('The build function', async t => {
     })
     .catch(err => t.equal(err.message, 'Settings must include a template function.', 'throws an error if a template function is not provided.'))
 
+  // Test CLI basic usage
+  fs.readFile('./test-output/test-cli/index.html')
+    .then(async data => {
+      t.ok(data.toString().includes('<title>Welcome to my webpage!</title>'), 'parses YAML at the top of a source file and assigns the value to the metadata key.')
+
+      t.ok(data.toString().includes('<h1>Hello, world!</h1>'), 'parses markdown in a source file and assigns the value to the html key.')
+    })
+    .catch(err => t.fail(err))
+
   t.end()
 })
 

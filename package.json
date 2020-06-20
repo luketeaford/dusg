@@ -15,7 +15,8 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "standard --fix",
     "prepublishOnly": "npm run lint && npm test",
-    "test": "nyc --reporter=lcov tape test/*.test.js | tap-spec"
+    "test": "npm run testCLI && nyc --reporter=lcov tape test/*.test.js | tap-spec",
+    "testCLI": "./bin/dusg.js --src='./test/data' --dest='./test-output/test-cli' --template='./test/simple-template.js'"
   },
   "repository": {
     "type": "git",
