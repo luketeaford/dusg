@@ -12,9 +12,10 @@ DUSG is a static site generator that uses JavaScript instead of templating langu
 ## What it Does
 - [x] Provides a Command Line Interface and a JavaScript API
 - [x] Reads Markdown files in a source directory
-- [x] Parses YAML in each file into the key 'metadata'
-- [x] Parses Markdown in each file into the key 'html'
-- [x] Creates an array of parsed files into the key 'siteMap'
+- [x] Parses YAML in each file into the key `metadata`
+- [x] Parses Markdown in each file into the key `html`
+- [x] Includes a `path` key for the output of each file
+- [x] Creates an array of parsed files into the key `siteMap`
 - [x] Uses a JavaScript function instead of templating languages
 - [x] Writes files to a destination directory
 
@@ -24,7 +25,7 @@ npm install --save-dev dusg
 ```
 
 ## Formatting Source Files
-Source files must end with the '.md' extension. A source file may begin with YAML which should begin and end with three hyphens ('---'). Markdown within the file will be parsed and turned into HTML.
+Source files must end with the `.md` extension. A source file may begin with YAML which should begin and end with three hyphens (`---`). Markdown within the file will be parsed and turned into HTML.
 
 ### Example Source File
 ```md
@@ -39,7 +40,7 @@ The metadata can contain whatever you want.
 ```
 
 ## Writing Template Functions
-A suitable template function is a callback that will receive a page object as its only argument. The page object has an html key that contains the markdown parsed as HTML, a metadata key that contains the YAML parsed as a JavaScript object, a path key that contains the output path of the file, and a siteMap object. The siteMap object's keys are all pages' paths relative to the destination directory. Each key in the siteMap contains that page's `pageObject`.
+A suitable template function is a callback that will receive a page object as its only argument. The page object has an `html` key that contains the markdown parsed as HTML, a `metadata` key that contains the YAML parsed as a JavaScript object, a `path` key that contains the output path of the file, and a `siteMap` object. The siteMap object's keys are all pages' paths relative to the destination directory. Each key in the siteMap contains that page's page object.
 
 ### Example Template Function
 ```js
@@ -77,5 +78,5 @@ dusg({
 ```
 
 ### Other Options
-  - cleanUrls means each file will be written to a directory so './about-me.md' would become './about-me/index.html'. This is enabled by default.
-  - extension is the file extension to write. The default is '.html'.
+  - cleanUrls means each file will be written to a directory so `./about-me.md` would become `./about-me/index.html`. This is enabled by default.
+  - extension is the file extension to write. The default is `.html`.
