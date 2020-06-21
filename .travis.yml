@@ -3,9 +3,10 @@ script: npm run test:travis
 after_success: npm run coverage
 deploy:
   on:
-  tags: true
-  branch: master
+    tags: true
+    branch: master
   script: npm publish
+  skip_cleanup: true
   provider: npm
   email: luketeaford@gmail.com
   api_key:
