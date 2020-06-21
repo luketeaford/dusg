@@ -1,3 +1,6 @@
+# 0.8.3
+- Minor bugfixes
+
 # 0.8.2
 - Remove linting from prepublishOnly
 
