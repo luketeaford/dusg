@@ -2,10 +2,11 @@ language: node_js
 script: npm run test:travis
 after_success: npm run coverage
 deploy:
+  on:
+  tags: true
+  branch: master
+  script: npm publish
   provider: npm
   email: luketeaford@gmail.com
   api_key:
     secure: mLKFJtNnL33QJhXuPl0Y0mUi/UaHrafrAZlWDNX+5DaGolVD9emaj8H3JmRr1EJl7hifuygeFpFmZgYjVn9ZM0reLOaZ6jn5Cr9wMgICt9kRCYS4TYc7+/K4ayJWYfkaJSyiD756y2II5mwyeyqbobJhO7EUE0jZlX+LuojrfQ+ZFZ6d3LJclHD4S89KlsHNS9oF6J+dw3uk7f0rGxMgSO2OeN11sVrgp7TqC0XGOgs7mr+FppLfZOT0ardMPZXWpD4nrCZK0bRaFem86P2wg+TJGKNu6sdob0ic69VtaAKr9F7rpKsXIoQ9ESGn6XSdYn57jMyGq2SkVIZ17MfHQjCFInIte4FD6bDg5RPZXxv1YMMzhNtovbFSiUF5LFdSIkhAF5lvvGOGlw3G9DuonfkRStItLEvXGno/5kmu3N6qLvnxRxgPoVLvEk++p3TP2UofO7ZE9wLHRfaxkMvaOa3bcLgEDO9KR+8C72CrRFWUhq9HI7ZJa4/lcLQ7VMo+eS/+NRUEiarAn9staNAng1jZQO4Q5+JD2GLx/puOLJ/zmjXzTEFIzIqj0LvM4gyyGltggm03qMgi7Zdms3fJYtHdfhDE6EU/BjheHE6ZxZsY6YDZ/0CU6TG63AHVo5Zl81arSIncp26MTfSS6410xrgHF32NAckjXNGMgQBoXa0=
-  on:
-    tags: true
-    branch: master
