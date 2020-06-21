@@ -114,6 +114,12 @@ test('The build function', async t => {
     })
     .catch(err => t.equal(err.message, 'Settings must include a template function.', 'throws an error if a template function is not provided.'))
 
+  await (build({ src: './test/data', dest: './test-output', template: 'no' }))
+    .then(() => {
+      t.fail('must throw an error if the template is not a function.')
+    })
+    .catch(err => t.equal(err.message, 'Settings must include a template that is a function.', 'throws an error if the template is not a function.'))
+
   // Test CLI basic usage
   fs.readFile('./test-output/test-cli/index.html')
     .then(async data => {
