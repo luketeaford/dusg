@@ -96,6 +96,12 @@ test('The build function', async t => {
     .catch(err => t.fail(err))
 
   // Test for required settings
+  await build()
+    .then(() => {
+      t.fail('must throw an error if a settings object is not provided.')
+    })
+    .catch(err => t.equal(err.message, 'A settings object must be provided.', 'throws an error if a settings object is not provided.'))
+
   await build({ src: '' })
     .then(() => {
       t.fail('must throw an error if a source directory is not provided.')
