@@ -106,13 +106,13 @@ test('The build function', async t => {
     .then(() => {
       t.fail('must throw an error if a source directory is not provided.')
     })
-    .catch(err => t.equal(err.message, 'Settings must include a source directory.', 'throws an error if a source directory is not provided.'))
+    .catch(err => t.equal(err.message, 'Settings must include a source directory string.', 'throws an error if a source directory is not provided.'))
 
   await build({ src: './test/data' })
     .then(() => {
       t.fail('must throw an error if a destination directory is not provided.')
     })
-    .catch(err => t.equal(err.message, 'Settings must include a destination directory.', 'throws an error if a destination directory is not provided.'))
+    .catch(err => t.equal(err.message, 'Settings must include a destination directory string.', 'throws an error if a destination directory is not provided.'))
 
   await build({ src: './test/data', dest: './test-output' })
     .then(() => {
@@ -124,7 +124,7 @@ test('The build function', async t => {
     .then(() => {
       t.fail('must throw an error if the template is not a function.')
     })
-    .catch(err => t.equal(err.message, 'Settings must include a template that is a function.', 'throws an error if the template is not a function.'))
+    .catch(err => t.equal(err.message, 'Settings must include a template function.', 'throws an error if the template is not a function.'))
 
   // Test CLI basic usage
   fs.readFile('./test-output/test-cli/index.html')
