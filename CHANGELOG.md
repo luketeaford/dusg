@@ -1,3 +1,6 @@
+# 0.9.0
+- Improve error handling and tests
+
 # 0.8.3
 - Minor bugfixes
 
