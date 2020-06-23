@@ -31,5 +31,8 @@ if (cliSettings.help || cliSettings.h) {
     template: templateFunction,
     cleanUrls,
     extension
+  }).catch(err => {
+    console.log(err)
+    process.exitCode = 1
   })
 }
