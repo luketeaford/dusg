@@ -61,22 +61,28 @@ test('The build function', async t => {
     })
     .catch(err => t.ok(err.message, 'does not output a file if the template returns an empty string.'))
 
-  // Test site map
+  // Test site map and stats times
   await build({
     src: './test/data',
     dest: './test-output/test-site-map',
     template: aPageObject => {
       const { siteMap } = aPageObject
 
-      const { path, metadata: pageMetadata } = siteMap['/marx-bros/groucho/index.html']
+      const { path, metadata: pageMetadata, stats } = siteMap['/marx-bros/groucho/index.html']
 
-      return `<a href="${path}">${pageMetadata && pageMetadata.title}</a>`
+      const { atimeMs, mtimeMs, ctimeMs, birthtimeMs, atime, mtime, ctime, birthtime } = stats || {}
+
+      const hasStatsTimes = atimeMs && mtimeMs && ctimeMs && birthtimeMs &&
+        atime && mtime && ctime && birthtime && 'stats included'
+
+      return `<a href="${path}">${pageMetadata && pageMetadata.title}</a>${hasStatsTimes}`
     }
   })
 
   fs.readFile('./test-output/test-site-map/marx-bros/index.html')
     .then(async data => {
-      t.equal(data.toString(), '<a href="./test-output/test-site-map/marx-bros/groucho/index.html">Groucho Marx</a>', 'includes a siteMap object with keys for the path of each file.')
+      t.ok(data.toString().includes('<a href="./test-output/test-site-map/marx-bros/groucho/index.html">Groucho Marx</a>'), 'includes a siteMap object with keys for the path of each file.')
+      t.ok(data.toString().includes('stats included'), 'each file has its stats object.')
     })
     .catch(err => t.fail(err))
 

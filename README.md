@@ -15,6 +15,7 @@ DUSG is a static site generator that uses JavaScript instead of templating langu
 - [x] Parses YAML in each file into the key `metadata`
 - [x] Parses Markdown in each file into the key `html`
 - [x] Includes a `path` key for the output of each file
+- [x] Includes a `stats` key for each file's information
 - [x] Creates an array of parsed files into the key `siteMap`
 - [x] Uses a JavaScript function instead of templating languages
 - [x] Writes files to a destination directory
