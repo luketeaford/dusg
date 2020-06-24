@@ -61,14 +61,16 @@ test('The build function', async t => {
     })
     .catch(err => t.ok(err.message, 'does not output a file if the template returns an empty string.'))
 
-  // Test site map and stats times
+  // Test site map, root relative url and stats times
   await build({
     src: './test/data',
     dest: './test-output/test-site-map',
     template: aPageObject => {
       const { siteMap } = aPageObject
 
-      const { path, metadata: pageMetadata, stats } = siteMap['/marx-bros/groucho/index.html']
+      const grouchoPageObject = siteMap.find(element => element.rootRelativeUrl === '/marx-bros/groucho/index.html')
+
+      const { path, metadata: pageMetadata, stats } = grouchoPageObject
 
       const { atimeMs, mtimeMs, ctimeMs, birthtimeMs, atime, mtime, ctime, birthtime } = stats || {}
 
