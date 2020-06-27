@@ -17,7 +17,7 @@ DUSG is a static site generator that uses JavaScript instead of templating langu
 - [x] Includes a `path` key for the output of each file
 - [x] Includes a `rootRelativeUrl` key for each file
 - [x] Includes a `stats` key for each file's information
-- [x] Creates an array of parsed files into the key `siteMap`
+- [x] Creates an array of parsed files into the key `siteObject`
 - [x] Uses a JavaScript function instead of templating languages
 - [x] Writes files to a destination directory
 
@@ -42,7 +42,7 @@ The metadata can contain whatever you want.
 ```
 
 ## Writing Template Functions
-A suitable template function is a callback that will receive a page object as its only argument. The page object has an `html` key that contains the markdown parsed as HTML, a `metadata` key that contains the YAML parsed as a JavaScript object, a `path` key that contains the output path of the file, and a `siteMap` object. The siteMap object's keys are all pages' paths relative to the destination directory. Each key in the siteMap contains that page's page object.
+A suitable template function is a callback that will receive a page object as its only argument. The page object has an `html` key that contains the markdown parsed as HTML, a `metadata` key that contains the YAML parsed as a JavaScript object, a `path` key that contains the output path of the file, and an object called `siteObject` which contains each `pageObject`.
 
 ### Example Template Function
 ```js

@@ -66,9 +66,9 @@ test('The build function', async t => {
     src: './test/data',
     dest: './test-output/test-site-map',
     template: aPageObject => {
-      const { siteMap } = aPageObject
+      const { siteObject } = aPageObject
 
-      const grouchoPageObject = siteMap.find(element => element.rootRelativeUrl === '/marx-bros/groucho/index.html')
+      const grouchoPageObject = siteObject.find(element => element.rootRelativeUrl === '/marx-bros/groucho/index.html')
 
       const { path, metadata: pageMetadata, stats } = grouchoPageObject
 
@@ -83,7 +83,7 @@ test('The build function', async t => {
 
   fs.readFile('./test-output/test-site-map/marx-bros/index.html')
     .then(async data => {
-      t.ok(data.toString().includes('<a href="./test-output/test-site-map/marx-bros/groucho/index.html">Groucho Marx</a>'), 'includes a siteMap object with keys for the path of each file.')
+      t.ok(data.toString().includes('<a href="./test-output/test-site-map/marx-bros/groucho/index.html">Groucho Marx</a>'), 'includes an object named siteObject with keys for the path of each file.')
       t.ok(data.toString().includes('stats included'), 'each file has its stats object.')
     })
     .catch(err => t.fail(err))
