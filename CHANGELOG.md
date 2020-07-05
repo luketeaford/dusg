@@ -1,3 +1,6 @@
+# 0.12.0
+- Rename siteObject to pageObjects
+
 # 0.11.0
 - Rename siteMap to siteObject
 - Include stats for each page object
