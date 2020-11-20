@@ -85,3 +85,4 @@ dusg({
 
 ### TODO
 - Document the shape of a pageObject
+- Make sure this works with ES6 modules
