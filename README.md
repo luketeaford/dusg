@@ -82,6 +82,3 @@ dusg({
 ### Other Options
   - cleanUrls means each file will be written to a directory so `./about-me.md` would become `./about-me/index.html`. This is enabled by default.
   - extension is the file extension to write. The default is `.html`.
-
-### TODO
-- Make sure this works with ES6 modules
