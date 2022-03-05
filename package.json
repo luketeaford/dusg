@@ -45,7 +45,7 @@
     "tape": "^4.13.3"
   },
   "dependencies": {
-    "js-yaml": "^3.14.0",
+    "js-yaml": "^4.1.0",
     "manchego": "^1.1.0",
     "marked": "^4.0.10"
   }
