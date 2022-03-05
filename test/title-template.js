@@ -1,4 +1,4 @@
-const titleTemplate = function (aPageObject) {
+const titleTemplate = aPageObject => {
   const { metadata } = aPageObject
   return metadata && metadata.title
 }
