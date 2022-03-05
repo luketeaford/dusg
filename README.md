@@ -84,5 +84,4 @@ dusg({
   - extension is the file extension to write. The default is `.html`.
 
 ### TODO
-- Document the shape of a pageObject
 - Make sure this works with ES6 modules
