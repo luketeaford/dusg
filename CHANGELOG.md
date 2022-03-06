@@ -1,3 +1,6 @@
+# 0.12.1
+- Dependency updates
+
 # 0.12.0
 - Rename siteObject to pageObjects
 

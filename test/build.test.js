@@ -89,10 +89,26 @@ test('The build function', async t => {
 
       const { path, metadata: pageMetadata, stats } = grouchoPageObject
 
-      const { atimeMs, mtimeMs, ctimeMs, birthtimeMs, atime, mtime, ctime, birthtime } = stats || {}
+      const {
+        atime,
+        atimeMs,
+        mtime,
+        mtimeMs,
+        ctime,
+        ctimeMs,
+        birthtime,
+        birthtimeMs
+      } = stats || {}
 
-      const hasStatsTimes = atimeMs && mtimeMs && ctimeMs && birthtimeMs &&
-        atime && mtime && ctime && birthtime && 'stats included'
+      const hasStatsTimes = atimeMs &&
+        mtimeMs &&
+        ctimeMs &&
+        birthtimeMs &&
+        atime &&
+        mtime &&
+        ctime &&
+        birthtime &&
+        'stats included'
 
       return `<a href="${path}">${pageMetadata && pageMetadata.title}</a>${hasStatsTimes}`
     }
