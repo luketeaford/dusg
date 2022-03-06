@@ -192,7 +192,7 @@ test('The build function', async t => {
   // Test CLI basic usage
   try {
     const data = await fs.readFile('./test-output/test-cli/index.html')
-    const dataString = data.toString();
+    const dataString = data.toString()
     t.ok(
       dataString.includes('<title>Welcome to my webpage!</title>'),
       'parses YAML at the top of a source file and assigns the value to the metadata key.'
