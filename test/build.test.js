@@ -154,5 +154,5 @@ test('The build function', async t => {
 })
 
 test.onFinish(async () => {
-  await fs.rmdir('./test-output', { recursive: true })
+  await fs.rm('./test-output', { recursive: true })
 })

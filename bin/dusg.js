@@ -2,13 +2,14 @@
 
 const manchego = require('manchego').convertBooleans
 const build = require('../lib/build')
+const path = require('path')
 const { version } = require('../package.json')
 
 const cliSettings = manchego(process.argv)
 
 if (cliSettings.help || cliSettings.h) {
   const fs = require('fs').promises
-  fs.readFile(`${__dirname}/../man/dusg.1`, { encoding: 'utf-8' })
+  fs.readFile(path.join(__dirname, '/../man/dusg.1'), { encoding: 'utf-8' })
     .then(console.log)
 } else if (cliSettings.version || cliSettings.v) {
   console.log(version)
