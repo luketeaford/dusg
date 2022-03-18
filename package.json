@@ -41,12 +41,12 @@
     "coveralls": "^3.1.0",
     "nyc": "^15.1.0",
     "standard": "^16.0.4",
-    "tap-spec": "^5.0.0",
+    "tap-spec": "^2.2.2",
     "tape": "^5.5.2"
   },
   "dependencies": {
     "js-yaml": "^4.1.0",
-    "manchego": "^1.1.0",
+    "manchego": "^1.1.2",
     "marked": "^4.0.10"
   }
 }
